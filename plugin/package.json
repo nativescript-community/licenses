@@ -1,0 +1,42 @@
+{
+    "name": "@nativescript-community/licenses",
+    "version": "1.1.1",
+    "description": "Nativescript plugin to generate licenses JSON files",
+    "nativescript": {
+        "platforms": {
+            "android": "5.0.0",
+            "ios": "5.0.0"
+        },
+        "hooks": [
+            {
+                "type": "after-prepare",
+                "script": "scripts/after-prepare.js",
+                "inject": true
+            }
+        ]
+    },
+    "dependencies": {
+        "@nativescript/hook": "~2.0.0",
+        "plist": "3.0.1"
+    },
+    "scripts": {
+        "preuninstall": "node preuninstall.js",
+        "postinstall": "node postinstall.js"
+    },
+    "keywords": [
+        "NativeScript",
+        "JavaScript",
+        "Android",
+        "iOS"
+    ],
+    "author": {
+        "name": "Martin Guillon",
+        "email": "martin@akylas.fr"
+    },
+    "bugs": {
+        "url": "https://github.com/nativescript-community/licenses/issues"
+    },
+    "license": "Apache-2.0",
+    "homepage": "https://github.com/nativescript-community/licenses",
+    "readmeFilename": "README.md"
+}

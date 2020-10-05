@@ -1,0 +1,2 @@
+
+apply from: "$USER_PROJECT_ROOT/node_modules/@nativescript-licenses/platforms/android/dependency-report.gradle"
