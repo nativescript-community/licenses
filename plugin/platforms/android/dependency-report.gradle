@@ -4,6 +4,8 @@ import com.github.jk1.license.render.JsonReportRenderer
 import com.github.jk1.license.render.InventoryHtmlReportRenderer
 import com.github.jk1.license.filter.DependencyFilter
 import com.github.jk1.license.filter.LicenseBundleNormalizer
+import org.gradle.internal.logging.text.StyledTextOutputFactory
+import static org.gradle.internal.logging.text.StyledTextOutput.Style
 buildscript {
   repositories {
     maven {
@@ -16,11 +18,27 @@ buildscript {
 }
 
 apply plugin: LicenseReportPlugin
+def pathToJarLicenses = "$USER_PROJECT_ROOT/platforms/android/licenses"
+def fileToJarLicenses = file(pathToJarLicenses)
+if (!fileToJarLicenses.exists()) {
+    mkdir pathToJarLicenses
+}
+def pathToLicenses = "${getAppPath()}/android"
+def fileToLicenses = file(pathToLicenses)
+if (!fileToLicenses.exists()) {
+    mkdir fileToLicenses
+}
+outLogger.withStyle(Style.Info).println "pathToJarLicenses: ${fileToJarLicenses.getAbsolutePath()}"
+outLogger.withStyle(Style.Info).println "pathToLicenses: ${fileToLicenses.getAbsolutePath()}"
 
+def relativePath =  java.nio.file.Paths.get(fileToJarLicenses.getAbsolutePath()).relativize(java.nio.file.Paths.get(fileToLicenses.getAbsolutePath())).toString()
+
+outLogger.withStyle(Style.Info).println "relativePath: $relativePath"
 licenseReport {
-    renderers = [new JsonReportRenderer("${getAppPath()}/android/licenses.json")]
+      outputDir = "${pathToJarLicenses}"
+        renderers = [new JsonReportRenderer("$relativePath/licenses.json")]
     configurations = ALL
       excludeOwnGroup = true
       excludeGroups = ['', 'androidx.*', 'com.android.tools.*', 'org.jetbrains.kotlin']
-      filters = [new LicenseBundleNormalizer(bundlePath: "$USER_PROJECT_ROOT/node_modules/@nativescript-licenses/platforms/android/license-normalizer-bundle.json")]
+      filters = [new LicenseBundleNormalizer(bundlePath: "$USER_PROJECT_ROOT/node_modules/@nativescript-community/licenses/platforms/android/license-normalizer-bundle.json")]
 }
