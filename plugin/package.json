@@ -9,8 +9,8 @@
         },
         "hooks": [
             {
-                "type": "after-prepare",
-                "script": "scripts/after-prepare.js",
+                "type": "after-prepareNativeApp",
+                "script": "scripts/after-prepareNativeApp.js",
                 "inject": true
             }
         ]
