@@ -36,7 +36,7 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
         if (platformName === 'android') {
             const platformsData = hookArgs.platformsData;
             const projectFilesPath = path.join(platformData.appDestinationDirectoryPath, 'app');
-            console.log('generateLicenseReport', projectData.projectDir, projectFilesPath);
+            // console.log('generateLicenseReport', projectData.projectDir, projectFilesPath);
             const command = spawn('./gradlew', ['generateLicenseReport'], {
                 cwd: path.join(projectData.projectDir, 'platforms/android'),
                 env:Object.assign(process.env, {
@@ -84,7 +84,7 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
                 })),
             };
             const outPath = path.join(platformData.appDestinationDirectoryPath, 'app');
-            console.log('generateLicenseReport', outPath);
+            // console.log('generateLicenseReport', outPath);
             // const outPath = path.join(projectData.appDirectoryPath, 'ios');
             if (!fs.existsSync(outPath)) {
                 fs.mkdirSync(outPath);
