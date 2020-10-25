@@ -3,7 +3,8 @@
 [downloads-image]: http://img.shields.io/npm/dm/@nativescript-community/licenses.svg
 
 This plugin is a plugin to easily integrate licenses used your apps.
-The plugin will automatically generate `licenses.json` either in `app/android` or `app/ios`
+The plugin will automatically generate `licenses.json`
+You simply need to load the `licenses.json` from anywhere in your app using either `require('licenses.json')` or `require('~/licenses.json')`
 You can then simply `require` that file to use it in your app.
 Here is an example JSON file format (`moduleDescription` not present on Android):
 

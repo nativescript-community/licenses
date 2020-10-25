@@ -2,16 +2,46 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as plist from 'plist';
 import { exec, spawn } from 'child_process';
-module.exports = function ($logger, $projectData, hookArgs) {
+
+function getPlatformData(
+    platformData,
+    projectData,
+    platform: string,
+    injector
+) {
+    if (!platformData) {
+        // Used in CLI 5.4.x and below:
+        const platformsData = injector.resolve('platformsData');
+        platformData = platformsData.getPlatformData(platform, projectData);
+    }
+    return platformData;
+}
+
+
+
+module.exports = function ($logger, projectData, injector, hookArgs) {
     return new Promise(function (resolve, reject) {
-        const platformFromHookArgs = hookArgs && (hookArgs.platform || (hookArgs.prepareData && hookArgs.prepareData.platform));
-        const platform = (platformFromHookArgs || '').toLowerCase();
+        const platformName = (
+            (hookArgs && hookArgs.platformData && hookArgs.platformData.normalizedPlatformName) ||
+            (hookArgs.checkForChangesOpts && hookArgs.checkForChangesOpts.platform) ||
+            ''
+        ).toLowerCase();
+
+        projectData =
+            hookArgs && (hookArgs.projectData || (hookArgs.checkForChangesOpts && hookArgs.checkForChangesOpts.projectData));
+
+        const platformData = getPlatformData(hookArgs && hookArgs.platformData, projectData, platformName, injector);
 
         /* Handle preparing of Google Services files */
-        if (platform === 'android') {
-            console.log('generateLicenseReport', $projectData.projectDir);
+        if (platformName === 'android') {
+            const platformsData = hookArgs.platformsData;
+            const projectFilesPath = path.join(platformData.appDestinationDirectoryPath, 'app');
+            console.log('generateLicenseReport', projectData.projectDir, projectFilesPath);
             const command = spawn('./gradlew', ['generateLicenseReport'], {
-                cwd: path.join($projectData.projectDir, 'platforms/android'),
+                cwd: path.join(projectData.projectDir, 'platforms/android'),
+                env:Object.assign(process.env, {
+                    LICENSES_OUTPUT_PATH:projectFilesPath
+                })
             });
 
             command.stdout.on('data', (data) => {
@@ -30,14 +60,14 @@ module.exports = function ($logger, $projectData, hookArgs) {
                     reject(new Error('generateLicenseReport failed'));
                 }
             });
-        } else if (platform === 'ios') {
+        } else if (platformName === 'ios') {
             const licenseUrls = {
                 'Apache 2.0': 'http://www.apache.org/licenses/LICENSE-2.0',
                 MIT: 'http://www.apache.org/licenses/LICENSE-2.0',
                 mit: 'http://www.apache.org/licenses/LICENSE-2.0',
                 BSD: 'https://opensource.org/licenses/BSD-3-Clause',
             };
-            const dirPath = path.join($projectData.projectDir, 'platforms/ios/Pods');
+            const dirPath = path.join(projectData.projectDir, 'platforms/ios/Pods');
             const metadaFile = fs.readdirSync(dirPath).filter((s) => s.endsWith('-metadata.plist'))[0];
             if (!metadaFile) {
                 return reject(new Error('Could not find the Pods metadata file'));
@@ -53,7 +83,9 @@ module.exports = function ($logger, $projectData, hookArgs) {
                     moduleLicenseUrl: licenseUrls[spec.licenseType],
                 })),
             };
-            const outPath = path.join($projectData.appDirectoryPath, 'ios');
+            const outPath = path.join(platformData.appDestinationDirectoryPath, 'app');
+            console.log('generateLicenseReport', outPath);
+            // const outPath = path.join(projectData.appDirectoryPath, 'ios');
             if (!fs.existsSync(outPath)) {
                 fs.mkdirSync(outPath);
             }

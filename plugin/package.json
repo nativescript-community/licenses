@@ -12,6 +12,11 @@
                 "type": "after-prepareNativeApp",
                 "script": "scripts/after-prepareNativeApp.js",
                 "inject": true
+            },
+            {
+                "type": "before-prepare",
+                "script": "scripts/before-prepare.js",
+                "inject": true
             }
         ]
     },
