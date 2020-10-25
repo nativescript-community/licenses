@@ -27,18 +27,18 @@ def pathToLicenses = "$System.env.LICENSES_OUTPUT_PATH"
 if (pathToLicenses == null) {
   pathToLicenses = "${getAppPath()}/android"
 }
-outLogger.withStyle(Style.Info).println "LICENSES_OUTPUT_PATH: $System.env.LICENSES_OUTPUT_PATH"
-outLogger.withStyle(Style.Info).println "pathToLicenses: $pathToLicenses"
+// outLogger.withStyle(Style.Info).println "LICENSES_OUTPUT_PATH: $System.env.LICENSES_OUTPUT_PATH"
+// outLogger.withStyle(Style.Info).println "pathToLicenses: $pathToLicenses"
 def fileToLicenses = file(pathToLicenses)
 if (!fileToLicenses.exists()) {
     mkdir fileToLicenses
 }
-outLogger.withStyle(Style.Info).println "pathToJarLicenses: ${fileToJarLicenses.getAbsolutePath()}"
-outLogger.withStyle(Style.Info).println "pathToLicenses: ${fileToLicenses.getAbsolutePath()}"
+// outLogger.withStyle(Style.Info).println "pathToJarLicenses: ${fileToJarLicenses.getAbsolutePath()}"
+// outLogger.withStyle(Style.Info).println "pathToLicenses: ${fileToLicenses.getAbsolutePath()}"
 
 def relativePath =  java.nio.file.Paths.get(fileToJarLicenses.getAbsolutePath()).relativize(java.nio.file.Paths.get(fileToLicenses.getAbsolutePath())).toString()
 
-outLogger.withStyle(Style.Info).println "relativePath: $relativePath"
+// outLogger.withStyle(Style.Info).println "relativePath: $relativePath"
 licenseReport {
       outputDir = "${pathToJarLicenses}"
         renderers = [new JsonReportRenderer("$relativePath/licenses.json")]
