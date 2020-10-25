@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5](https://github.com/nativescript-community/licenses/compare/v1.1.4...v1.1.5) (2020-10-25)
+
+
+### Bug Fixes
+
+* working good now ([eae7c6c](https://github.com/nativescript-community/licenses/commit/eae7c6c8ced9b3c581913fa5f1d1d6a229eb45fb))
+
+
+
+
+
 ## [1.1.4](https://github.com/nativescript-community/licenses/compare/v1.1.3...v1.1.4) (2020-10-23)
 
 
