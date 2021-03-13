@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.7](https://github.com/nativescript-community/licenses/compare/v1.1.6...v1.1.7) (2021-03-13)
+
+
+### Bug Fixes
+
+* **android:** allow custom name through env Variable ([e9d913d](https://github.com/nativescript-community/licenses/commit/e9d913d5b96cc65fc31cb078ac1e9b47220bf86c))
+
+
+
+
+
 ## [1.1.6](https://github.com/nativescript-community/licenses/compare/v1.1.5...v1.1.6) (2021-03-13)
 
 
