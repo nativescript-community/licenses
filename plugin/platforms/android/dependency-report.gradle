@@ -27,6 +27,10 @@ def pathToLicenses = "$System.env.LICENSES_OUTPUT_PATH"
 if (pathToLicenses == null) {
   pathToLicenses = "${getAppPath()}/android"
 }
+def licensesFileName = "$System.env.LICENSES_FILE_NAME" 
+if (pathToLicenses == null) {
+  pathToLicenses = "licenses.json"
+}
 // outLogger.withStyle(Style.Info).println "LICENSES_OUTPUT_PATH: $System.env.LICENSES_OUTPUT_PATH"
 // outLogger.withStyle(Style.Info).println "pathToLicenses: $pathToLicenses"
 def fileToLicenses = file(pathToLicenses)
@@ -41,7 +45,7 @@ def relativePath =  java.nio.file.Paths.get(fileToJarLicenses.getAbsolutePath())
 // outLogger.withStyle(Style.Info).println "relativePath: $relativePath"
 licenseReport {
       outputDir = "${pathToJarLicenses}"
-        renderers = [new JsonReportRenderer("$relativePath/licenses.json")]
+        renderers = [new JsonReportRenderer("$relativePath/$licensesFileName")]
     configurations = ALL
       excludeOwnGroup = true
       excludeGroups = ['', 'androidx.*', 'com.android.tools.*', 'org.jetbrains.kotlin']
