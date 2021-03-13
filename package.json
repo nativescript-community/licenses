@@ -12,6 +12,7 @@
     },
     "scripts": {
         "setup": "ts-patch install",
+"prepare": "npm run setup",
         "tsc": "cpy '**/*.d.ts' '../plugin' --parents --cwd=src && tsc -skipLibCheck",
         "clean": "rimraf ./plugin/**/*.d.ts ./plugin/**/*.js ./plugin/**/*.js.map plugin/node_modules plugin/package-lock.json",
         "build.plugin": "npm run tsc && cp README.md plugin/",
@@ -20,7 +21,7 @@
         "build.ios": "bash src-native/ios/build.sh",
         "build.native": "npm run build.android && npm run build.ios",
         "build": "npm run build.plugin && npm run build.hooks",
-        "publish": "npm run setup && npm run build && lerna publish --github-release",
+        "publish": "npm run setup && npm run build && lerna publish --create-release=github",
         "demo.ios": "npm i && npm run tsc && cd demo && tns run ios",
         "demo.android": "npm i && npm run tsc && cd demo && tns run android",
         "clean.demo": "rimraf demo/hooks demo/node_modules demo/platforms",
