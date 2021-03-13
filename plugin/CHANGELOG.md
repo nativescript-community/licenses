@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.6](https://github.com/nativescript-community/licenses/compare/v1.1.5...v1.1.6) (2021-03-13)
+
+
+### Bug Fixes
+
+* android plugin update ([5e002ab](https://github.com/nativescript-community/licenses/commit/5e002abdda9813db26877b4708b83566d05260b1))
+
+
+
+
+
 ## [1.1.5](https://github.com/nativescript-community/licenses/compare/v1.1.4...v1.1.5) (2020-10-25)
 
 
