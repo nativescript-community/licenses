@@ -37,7 +37,7 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
             const platformsData = hookArgs.platformsData;
             const projectFilesPath = path.join(platformData.appDestinationDirectoryPath, 'app');
             // console.log('generateLicenseReport', projectData.projectDir, projectFilesPath);
-            const command = spawn('./gradlew', ['generateLicenseReport', '--rerun-tasks'], {
+            const command = spawn(process.platform === 'win32' ? 'gradlew.bat' : './gradlew', ['generateLicenseReport', '--rerun-tasks'], {
                 cwd: path.join(projectData.projectDir, 'platforms/android'),
                 env:Object.assign(process.env, {
                     LICENSES_OUTPUT_PATH:process.env.LICENSES_OUTPUT_PATH || projectFilesPath
