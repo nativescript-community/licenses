@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.8](https://github.com/nativescript-community/licenses/compare/v1.1.7...v1.1.8) (2021-03-18)
+
+
+### Bug Fixes
+
+* fix for null file name ([e5390d6](https://github.com/nativescript-community/licenses/commit/e5390d6a668cbcdf135867fb7308a85de1c4d1d5))
+
+
+
+
+
 ## [1.1.7](https://github.com/nativescript-community/licenses/compare/v1.1.6...v1.1.7) (2021-03-13)
 
 
