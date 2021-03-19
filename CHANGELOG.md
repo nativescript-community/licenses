@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.9](https://github.com/nativescript-community/licenses/compare/v1.1.8...v1.1.9) (2021-03-19)
+
+
+### Bug Fixes
+
+* **android:** should fix licenses file name ([3032cbf](https://github.com/nativescript-community/licenses/commit/3032cbfc76466aaaca00e3bd2fe1ba46c1457173))
+
+
+
+
+
 ## [1.1.8](https://github.com/nativescript-community/licenses/compare/v1.1.7...v1.1.8) (2021-03-18)
 
 
