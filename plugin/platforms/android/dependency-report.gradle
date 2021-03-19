@@ -24,11 +24,11 @@ if (!fileToJarLicenses.exists()) {
     mkdir pathToJarLicenses
 }
 def pathToLicenses = "$System.env.LICENSES_OUTPUT_PATH" 
-if (pathToLicenses == null) {
+if (pathToLicenses == "null") {
   pathToLicenses = "${getAppPath()}/android"
 }
 def licensesFileName = "$System.env.LICENSES_FILE_NAME" 
-if (pathToLicenses == "") {
+if (pathToLicenses == "null") {
   pathToLicenses = "licenses.json"
 }
 // outLogger.withStyle(Style.Info).println "LICENSES_OUTPUT_PATH: $System.env.LICENSES_OUTPUT_PATH"
