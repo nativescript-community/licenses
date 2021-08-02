@@ -13,7 +13,7 @@ buildscript {
     }
   }
   dependencies {
-        classpath 'com.github.jk1:gradle-license-report:1.16'
+        classpath 'com.github.jk1:gradle-license-report:1.17'
   }
 }
 
@@ -48,6 +48,6 @@ licenseReport {
         renderers = [new JsonReportRenderer("$relativePath/$licensesFileName")]
     configurations = ALL
       excludeOwnGroup = true
-      excludeGroups = ['', 'androidx.*', 'com.android.tools.*', 'org.jetbrains.kotlin']
+      excludeGroups = ['', 'com.android.tools.*', 'org.jetbrains.kotlin']
       filters = [new LicenseBundleNormalizer(bundlePath: "$USER_PROJECT_ROOT/node_modules/@nativescript-community/licenses/platforms/android/license-normalizer-bundle.json")]
 }
