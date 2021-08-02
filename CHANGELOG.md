@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.11](https://github.com/nativescript-community/licenses/compare/v1.1.10...v1.1.11) (2021-08-02)
+
+
+### Bug Fixes
+
+* **android:** update native dep ([02f9463](https://github.com/nativescript-community/licenses/commit/02f94639cb192b78d5014aac436f8b27be085a89))
+
+
+
+
+
 ## [1.1.10](https://github.com/nativescript-community/licenses/compare/v1.1.9...v1.1.10) (2021-03-19)
 
 
