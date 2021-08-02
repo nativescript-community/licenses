@@ -2,6 +2,15 @@
 [npm-url]: https://npmjs.org/package/@nativescript-community/licenses
 [downloads-image]: http://img.shields.io/npm/dm/@nativescript-community/licenses.svg
 
+### Installation
+
+On iOS you need to run this first:
+```
+gem install cocoapods-acknowledgements
+```
+
+## Usage
+
 This plugin is a plugin to easily integrate licenses used your apps.
 The plugin will automatically generate `licenses.json`
 You simply need to load the `licenses.json` from anywhere in your app using either `require('licenses.json')` or `require('~/licenses.json')`
