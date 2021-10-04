@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/nativescript-community/licenses/compare/v2.0.0...v2.0.1) (2021-10-04)
+
+
+### Bug Fixes
+
+* **android:** only report runtime classes ([ed0d9b7](https://github.com/nativescript-community/licenses/commit/ed0d9b7f4ec0953b10857e7cbe26bed3855beb1b))
+
+
+
+
+
 # [2.0.0](https://github.com/nativescript-community/licenses/compare/v1.1.11...v2.0.0) (2021-10-04)
 
 
