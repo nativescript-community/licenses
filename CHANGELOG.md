@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/nativescript-community/licenses/compare/v1.1.11...v2.0.0) (2021-10-04)
+
+
+### Bug Fixes
+
+* update for gradle 7.0 ([d115290](https://github.com/nativescript-community/licenses/commit/d115290aa3c564f477ca4220541dc7c8ca480f6f))
+
+
+
+
+
 ## [1.1.11](https://github.com/nativescript-community/licenses/compare/v1.1.10...v1.1.11) (2021-08-02)
 
 
