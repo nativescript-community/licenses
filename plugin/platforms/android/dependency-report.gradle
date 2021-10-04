@@ -45,8 +45,8 @@ def relativePath =  java.nio.file.Paths.get(fileToJarLicenses.getAbsolutePath())
 // outLogger.withStyle(Style.Info).println "relativePath: $relativePath"
 licenseReport {
       outputDir = "${pathToJarLicenses}"
-        renderers = [new JsonReportRenderer("$relativePath/$licensesFileName")]
-    configurations = ALL
+      renderers = [new JsonReportRenderer("$relativePath/$licensesFileName")]
+      configurations = ['runtimeClasspath']
       excludeOwnGroup = true
       excludeGroups = ['', 'com.android.tools.*', 'org.jetbrains.kotlin']
       filters = [new LicenseBundleNormalizer(bundlePath: "$USER_PROJECT_ROOT/node_modules/@nativescript-community/licenses/platforms/android/license-normalizer-bundle.json")]
