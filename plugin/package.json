@@ -1,6 +1,6 @@
 {
     "name": "@nativescript-community/licenses",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "description": "Nativescript plugin to generate licenses JSON files",
     "nativescript": {
         "platforms": {
