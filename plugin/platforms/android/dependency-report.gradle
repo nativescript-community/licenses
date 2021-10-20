@@ -18,7 +18,12 @@ buildscript {
 }
 
 apply plugin: LicenseReportPlugin
-def pathToJarLicenses = "$USER_PROJECT_ROOT/platforms/android/licenses"
+
+
+def pathToJarLicenses = "$System.env.LICENSES_BUILD_PATH" 
+if (pathToJarLicenses == "null"  ) {
+  pathToJarLicenses = "$USER_PROJECT_ROOT/platforms/android/licenses"
+}
 def fileToJarLicenses = file(pathToJarLicenses)
 if (!fileToJarLicenses.exists()) {
     mkdir pathToJarLicenses
