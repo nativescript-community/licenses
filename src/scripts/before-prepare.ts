@@ -1,4 +1,3 @@
-
 module.exports = function ($logger, projectData, injector, hookArgs) {
     const prepareData = hookArgs.prepareData;
     prepareData.env = prepareData.env || {};
