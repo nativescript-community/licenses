@@ -3,12 +3,7 @@ import * as fs from 'fs';
 import * as plist from 'plist';
 import { exec, spawn } from 'child_process';
 
-function getPlatformData(
-    platformData,
-    projectData,
-    platform: string,
-    injector
-) {
+function getPlatformData(platformData, projectData, platform: string, injector) {
     if (!platformData) {
         // Used in CLI 5.4.x and below:
         const platformsData = injector.resolve('platformsData');
@@ -16,8 +11,6 @@ function getPlatformData(
     }
     return platformData;
 }
-
-
 
 module.exports = function ($logger, projectData, injector, hookArgs) {
     return new Promise<void>(function (resolve, reject) {
@@ -36,13 +29,22 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
         if (platformName === 'android') {
             const platformsData = hookArgs.platformsData;
             const projectFilesPath = path.join(platformData.appDestinationDirectoryPath, 'app');
+            const fileName = 'licences.json';
+            if (fs.existsSync(path.join(projectFilesPath, 'licences.json'))) {
+                fs.unlinkSync(path.join(projectFilesPath, 'licences.json'));
+            }
             // console.log('generateLicenseReport', projectData.projectDir, projectFilesPath);
-            const command = spawn(process.platform === 'win32' ? 'gradlew.bat' : './gradlew', ['generateLicenseReport', '--rerun-tasks'], {
-                cwd: path.join(projectData.projectDir, 'platforms/android'),
-                env:Object.assign(process.env, {
-                    LICENSES_OUTPUT_PATH:process.env.LICENSES_OUTPUT_PATH || projectFilesPath
-                })
-            });
+            const command = spawn(
+                process.platform === 'win32' ? 'gradlew.bat' : './gradlew',
+                ['generateLicenseReport', '--rerun-tasks'],
+                {
+                    cwd: path.join(projectData.projectDir, 'platforms/android'),
+                    env: Object.assign(process.env, {
+                        LICENSES_OUTPUT_PATH: process.env.LICENSES_OUTPUT_PATH || projectFilesPath,
+                        LICENSES_FILE_NAME: process.env.LICENSES_FILE_NAME || fileName,
+                    }),
+                }
+            );
 
             command.stdout.on('data', (data) => {
                 $logger.info('@nativescript-community/licenses: ' + data);
@@ -72,7 +74,7 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
             if (!metadaFile) {
                 return reject(new Error('Could not find the Pods metadata file'));
             }
-            const obj = plist.parse(fs.readFileSync(path.join(dirPath, metadaFile), 'utf8'));
+            const obj = (plist as any).parse(fs.readFileSync(path.join(dirPath, metadaFile), 'utf8'));
             const result = {
                 dependencies: obj.specs.map((spec) => ({
                     moduleName: spec.name,
