@@ -26,7 +26,7 @@
             "*": ["./node_modules/@nativescript/core/*", "./node_modules/*"]
         },
         "plugins": [
-            { "transform": "./node_modules/@nativescript/webpack/transformers/ns-transform-native-classes", "type": "raw" }
+            { "transform": "@nativescript/webpack/dist/transformers/NativeClass", "type": "raw" }
         ]
     },
     "include": ["src/**/*.ts", "references.d.ts", "src/references.d.ts"],
