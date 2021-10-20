@@ -24,6 +24,8 @@ def pathToJarLicenses = "$System.env.LICENSES_BUILD_PATH"
 if (pathToJarLicenses == "null"  ) {
   pathToJarLicenses = "$USER_PROJECT_ROOT/platforms/android/licenses"
 }
+// delete the build dir or the cache will prevent updates
+delete pathToJarLicenses;
 def fileToJarLicenses = file(pathToJarLicenses)
 if (!fileToJarLicenses.exists()) {
     mkdir pathToJarLicenses

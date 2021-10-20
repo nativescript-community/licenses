@@ -31,10 +31,6 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
             const projectFilesPath = path.join(platformData.appDestinationDirectoryPath, 'app');
             const fileName = 'licences.json';
             const buildDir = path.join(projectData.projectDir, 'platforms/android');
-            const licencesBuildDir = process.env.LICENSES_BUILD_PATH || path.join(buildDir, 'licenses');
-            if (fs.existsSync(licencesBuildDir)) {
-                fs.rmdirSync(licencesBuildDir, { recursive: true });
-            }
             // console.log('generateLicenseReport', projectData.projectDir, projectFilesPath);
             const command = spawn(
                 process.platform === 'win32' ? 'gradlew.bat' : './gradlew',
@@ -42,7 +38,7 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
                 {
                     cwd: buildDir,
                     env: Object.assign(process.env, {
-                        LICENSES_BUILD_PATH: licencesBuildDir,
+                        LICENSES_BUILD_PATH:  process.env.LICENSES_BUILD_PATH || path.join(buildDir, 'licenses'),
                         LICENSES_OUTPUT_PATH: process.env.LICENSES_OUTPUT_PATH || projectFilesPath,
                         LICENSES_FILE_NAME: process.env.LICENSES_FILE_NAME || fileName,
                     }),
