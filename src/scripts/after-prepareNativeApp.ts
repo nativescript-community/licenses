@@ -38,7 +38,7 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
                 {
                     cwd: buildDir,
                     env: Object.assign(process.env, {
-                        LICENSES_BUILD_PATH:  process.env.LICENSES_BUILD_PATH || path.join(buildDir, 'licenses'),
+                        LICENSES_BUILD_PATH: process.env.LICENSES_BUILD_PATH || path.join(buildDir, 'licenses'),
                         LICENSES_OUTPUT_PATH: process.env.LICENSES_OUTPUT_PATH || projectFilesPath,
                         LICENSES_FILE_NAME: process.env.LICENSES_FILE_NAME || fileName,
                     }),
