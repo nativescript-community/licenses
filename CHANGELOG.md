@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/nativescript-community/licenses/compare/v2.0.2...v2.0.3) (2021-10-20)
+
+
+### Bug Fixes
+
+* overwrite licences.json if exists ([e200bca](https://github.com/nativescript-community/licenses/commit/e200bca993e007c5a4e886d6e84fb61d1fe38631))
+
+
+
+
+
 ## [2.0.2](https://github.com/nativescript-community/licenses/compare/v2.0.1...v2.0.2) (2021-10-04)
 
 
