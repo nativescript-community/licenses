@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.6](https://github.com/nativescript-community/licenses/compare/v2.0.5...v2.0.6) (2021-10-30)
+
+
+### Bug Fixes
+
+* **android:** wrong licenses filename ([ce8e235](https://github.com/nativescript-community/licenses/commit/ce8e23540afc5b2a23e1c437619890efe24e9861))
+
+
+
+
+
 ## [2.0.5](https://github.com/nativescript-community/licenses/compare/v2.0.4...v2.0.5) (2021-10-20)
 
 
