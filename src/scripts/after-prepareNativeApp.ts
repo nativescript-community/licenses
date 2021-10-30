@@ -29,7 +29,7 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
         if (platformName === 'android') {
             const platformsData = hookArgs.platformsData;
             const projectFilesPath = path.join(platformData.appDestinationDirectoryPath, 'app');
-            const fileName = 'licences.json';
+            const fileName = 'licenses.json';
             const buildDir = path.join(projectData.projectDir, 'platforms/android');
             // console.log('generateLicenseReport', projectData.projectDir, projectFilesPath);
             const command = spawn(
