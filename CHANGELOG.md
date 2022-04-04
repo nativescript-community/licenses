@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.7](https://github.com/nativescript-community/licenses/compare/v2.0.6...v2.0.7) (2022-04-04)
+
+
+### Bug Fixes
+
+* **android:** gradle error on node 17.8.0 ([74d1c9e](https://github.com/nativescript-community/licenses/commit/74d1c9e4450130e7111b007b797ccafee01b19d5))
+
+
+
+
+
 ## [2.0.6](https://github.com/nativescript-community/licenses/compare/v2.0.5...v2.0.6) (2021-10-30)
 
 
