@@ -26,35 +26,36 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
         const platformData = getPlatformData(hookArgs && hookArgs.platformData, projectData, platformName, injector);
 
         /* Handle preparing of Google Services files */
+        const cwd = platformData.projectRoot;
+        const options = platformData.platformProjectService.$options;
         if (platformName === 'android') {
-            const platformsData = hookArgs.platformsData;
             const projectFilesPath = path.join(platformData.appDestinationDirectoryPath, 'app');
             const fileName = 'licenses.json';
-            const buildDir = path.join(projectData.projectDir, 'platforms/android');
             // console.log('generateLicenseReport', projectData.projectDir, projectFilesPath);
-            const command = spawn(
-                process.platform === 'win32' ? 'gradlew.bat' : './gradlew',
-                ['generateLicenseReport', '--rerun-tasks'],
-                {
-                    cwd: buildDir,
-                    env: Object.assign(process.env, {
-                        LICENSES_BUILD_PATH: process.env.LICENSES_BUILD_PATH || path.join(buildDir, 'licenses'),
-                        LICENSES_OUTPUT_PATH: process.env.LICENSES_OUTPUT_PATH || projectFilesPath,
-                        LICENSES_FILE_NAME: process.env.LICENSES_FILE_NAME || fileName,
-                    }),
-                }
-            );
-
-            command.stdout.on('data', (data) => {
-                $logger.info('@nativescript-community/licenses: ' + data);
+            let command = options.gradlePath || (process.platform === 'win32' ? 'gradlew.bat' : './gradlew');
+            if (command.charAt(0) === '.') {
+                // resolve relative paths to full paths to avoid node Spawn ENOENT errors on some setups.
+                command = path.resolve(cwd, command);
+            }
+            const spawnCommand = spawn(command, ['generateLicenseReport', '--rerun-tasks'], {
+                cwd,
+                env: Object.assign({}, process.env, {
+                    LICENSES_BUILD_PATH: process.env.LICENSES_BUILD_PATH || path.join(cwd, 'licenses'),
+                    LICENSES_OUTPUT_PATH: process.env.LICENSES_OUTPUT_PATH || projectFilesPath,
+                    LICENSES_FILE_NAME: process.env.LICENSES_FILE_NAME || fileName,
+                }),
             });
 
-            command.stderr.on('data', (data) => {
+            spawnCommand.stdout.on('data', (data) => {
+                $logger.debug('@nativescript-community/licenses: ' + data);
+            });
+
+            spawnCommand.stderr.on('data', (data) => {
                 $logger.error('@nativescript-community/licenses: ' + data);
             });
 
-            command.on('close', (code) => {
-                console.log(`child process exited with code ${code}`);
+            spawnCommand.on('close', (code) => {
+                $logger.debug(`generateLicenseReport process exited with code ${code}`);
                 if (code === 0) {
                     resolve();
                 } else {
@@ -68,7 +69,7 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
                 mit: 'http://www.apache.org/licenses/LICENSE-2.0',
                 BSD: 'https://opensource.org/licenses/BSD-3-Clause',
             };
-            const dirPath = path.join(projectData.projectDir, 'platforms/ios/Pods');
+            const dirPath = path.join(cwd, 'Pods');
             const metadaFile = fs.readdirSync(dirPath).filter((s) => s.endsWith('-metadata.plist'))[0];
             if (!metadaFile) {
                 return reject(new Error('Could not find the Pods metadata file'));
