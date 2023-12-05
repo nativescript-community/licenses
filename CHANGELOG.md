@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.8](https://github.com/nativescript-community/licenses/compare/v2.0.7...v2.0.8) (2023-12-05)
+
+
+### Bug Fixes
+
+* support multi projects ([536f97c](https://github.com/nativescript-community/licenses/commit/536f97cb5a564ac4be40b99834dae8b123425bc8))
+
+
+
+
+
 ## [2.0.7](https://github.com/nativescript-community/licenses/compare/v2.0.6...v2.0.7) (2022-04-04)
 
 
