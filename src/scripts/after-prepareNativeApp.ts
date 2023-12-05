@@ -37,7 +37,8 @@ module.exports = function ($logger, projectData, injector, hookArgs) {
                 // resolve relative paths to full paths to avoid node Spawn ENOENT errors on some setups.
                 command = path.resolve(cwd, command);
             }
-            const spawnCommand = spawn(command, ['generateLicenseReport', '--rerun-tasks'], {
+            const spawnCommand = spawn(command, ['generateLicenseReport', '--rerun-tasks', `-PprojectRoot=${projectData.projectDir}`,
+			`-DprojectRoot=${projectData.projectDir}`], {
                 cwd,
                 env: Object.assign({}, process.env, {
                     LICENSES_BUILD_PATH: process.env.LICENSES_BUILD_PATH || path.join(cwd, 'licenses'),
