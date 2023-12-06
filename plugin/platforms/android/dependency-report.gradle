@@ -12,49 +12,53 @@ buildscript {
       url "https://plugins.gradle.org/m2/"
     }
   }
+  def licenseReporterVersion = project.hasProperty("licenseReporterVersion") ? licenseReporterVersion : "2.4"
   dependencies {
-        classpath 'com.github.jk1:gradle-license-report:2.0'
+        classpath "com.github.jk1:gradle-license-report:$licenseReporterVersion"
   }
 }
 
-apply plugin: LicenseReportPlugin
+def pathToJarLicenses = "$System.env.LICENSES_BUILD_PATH"
+// we only do our stuff if we are called for generateLicenseReport task on which we add env.LICENSES_BUILD_PATH
+if (pathToJarLicenses != "null"  ) {
+  apply plugin: LicenseReportPlugin
 
 
-def pathToJarLicenses = "$System.env.LICENSES_BUILD_PATH" 
-if (pathToJarLicenses == "null"  ) {
-  pathToJarLicenses = "$USER_PROJECT_ROOT/platforms/android/licenses"
-}
-// delete the build dir or the cache will prevent updates
-delete pathToJarLicenses;
-def fileToJarLicenses = file(pathToJarLicenses)
-if (!fileToJarLicenses.exists()) {
-    mkdir pathToJarLicenses
-}
-def pathToLicenses = "$System.env.LICENSES_OUTPUT_PATH" 
-if (pathToLicenses == "null"  ) {
-  pathToLicenses = "${getAppPath()}/android"
-}
-def licensesFileName = "$System.env.LICENSES_FILE_NAME" 
-if (licensesFileName == "null") {
-  licensesFileName = "licenses.json"
-}
-// outLogger.withStyle(Style.Info).println "LICENSES_OUTPUT_PATH: $System.env.LICENSES_OUTPUT_PATH"
-// outLogger.withStyle(Style.Info).println "pathToLicenses: $pathToLicenses"
-def fileToLicenses = file(pathToLicenses)
-if (!fileToLicenses.exists()) {
-    mkdir fileToLicenses
-}
-// outLogger.withStyle(Style.Info).println "pathToJarLicenses: ${fileToJarLicenses.getAbsolutePath()}"
-// outLogger.withStyle(Style.Info).println "pathToLicenses: ${fileToLicenses.getAbsolutePath()}"
+  if (pathToJarLicenses == "null") {
+    pathToJarLicenses = "$USER_PROJECT_ROOT/platforms/android/licenses"
+  }
+  // delete the build dir or the cache will prevent updates
+  delete pathToJarLicenses;
+  def fileToJarLicenses = file(pathToJarLicenses)
+  if (!fileToJarLicenses.exists()) {
+      mkdir pathToJarLicenses
+  }
+  def pathToLicenses = "$System.env.LICENSES_OUTPUT_PATH" 
+  if (pathToLicenses == "null") {
+    pathToLicenses = "${getAppPath()}/android"
+  }
+  def licensesFileName = "$System.env.LICENSES_FILE_NAME" 
+  if (licensesFileName == "null") {
+    licensesFileName = "licenses.json"
+  }
+  // outLogger.withStyle(Style.Info).println "LICENSES_OUTPUT_PATH: $System.env.LICENSES_OUTPUT_PATH"
+  // outLogger.withStyle(Style.Info).println "pathToLicenses: $pathToLicenses"
+  def fileToLicenses = file(pathToLicenses)
+  if (!fileToLicenses.exists()) {
+      mkdir fileToLicenses
+  }
+  // outLogger.withStyle(Style.Info).println "pathToJarLicenses: ${fileToJarLicenses.getAbsolutePath()}"
+  // outLogger.withStyle(Style.Info).println "pathToLicenses: ${fileToLicenses.getAbsolutePath()}"
 
-def relativePath =  java.nio.file.Paths.get(fileToJarLicenses.getAbsolutePath()).relativize(java.nio.file.Paths.get(fileToLicenses.getAbsolutePath())).toString()
+  def relativePath =  java.nio.file.Paths.get(fileToJarLicenses.getAbsolutePath()).relativize(java.nio.file.Paths.get(fileToLicenses.getAbsolutePath())).toString()
 
-// outLogger.withStyle(Style.Info).println "relativePath: $relativePath"
-licenseReport {
-      outputDir = "${pathToJarLicenses}"
-      renderers = [new JsonReportRenderer("$relativePath/$licensesFileName")]
-      configurations = ['releaseRuntimeClasspath']
-      excludeOwnGroup = true
-      excludeGroups = ['', 'com.android.tools.*', 'org.jetbrains.kotlin']
-      filters = [new LicenseBundleNormalizer(bundlePath: "$USER_PROJECT_ROOT/node_modules/@nativescript-community/licenses/platforms/android/license-normalizer-bundle.json")]
+  // outLogger.withStyle(Style.Info).println "relativePath: $relativePath"
+  licenseReport {
+        outputDir = "${pathToJarLicenses}"
+        renderers = [new JsonReportRenderer("$relativePath/$licensesFileName")]
+        configurations = ['releaseRuntimeClasspath']
+        excludeOwnGroup = true
+        excludeGroups = ['', 'com.android.tools.*', 'org.jetbrains.kotlin']
+        filters = [new LicenseBundleNormalizer(bundlePath: "$USER_PROJECT_ROOT/node_modules/@nativescript-community/licenses/platforms/android/license-normalizer-bundle.json")]
+  }
 }
