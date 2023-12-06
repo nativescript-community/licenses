@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.9](https://github.com/nativescript-community/licenses/compare/v2.0.8...v2.0.9) (2023-12-06)
+
+
+### Bug Fixes
+
+* **android:** refactor to prevent unwanted directory creation ([f2a891f](https://github.com/nativescript-community/licenses/commit/f2a891f67409b2ba3187b418587e03e4a0e74ad3))
+
+
+
+
+
 ## [2.0.8](https://github.com/nativescript-community/licenses/compare/v2.0.7...v2.0.8) (2023-12-05)
 
 
